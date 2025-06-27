@@ -38,6 +38,7 @@ terraform.rc
 
 # IDE
 .idea
+.vscode
 
 # OS
 .DS_STORE
