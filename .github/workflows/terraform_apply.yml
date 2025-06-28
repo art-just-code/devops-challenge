@@ -1,4 +1,4 @@
-name: Terraform_apply
+name: Terraform Apply
 
 on:
   pull_request:
@@ -8,7 +8,6 @@ jobs:
   apply:
     if: github.event.pull_request.merged == true && github.ref == 'refs/heads/master'
     runs-on: ubuntu-latest
-    needs: [plan]
     environment:
       name: production
     strategy:
