@@ -28,11 +28,6 @@ jobs:
         run: terraform -chdir=${{ matrix.path }} validate -no-color
       - name: Terraform Plan
         run: terraform -chdir=${{ matrix.path }} plan -out=tfplan -input=false
-      - name: Upload Terraform Plan artifact
-        uses: actions/upload-artifact@v3
-        with:
-          name: tfplan-${{ matrix.path }}
-          path: ${{ matrix.path }}/tfplan
 
   apply:
     if: github.event.pull_request.merged == true && github.ref == 'refs/heads/master'
@@ -50,11 +45,6 @@ jobs:
         uses: hashicorp/setup-terraform@v3.1
         with:
           terraform_wrapper: false
-      - name: Download Terraform Plan artifact
-        uses: actions/download-artifact@v3
-        with:
-          name: tfplan-${{ matrix.path }}
-          path: ${{ matrix.path }}/tfplan
       - name: Terraform Init
         run: terraform -chdir=${{ matrix.path }} init
       - name: Terraform Apply
