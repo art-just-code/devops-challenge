@@ -16,6 +16,11 @@ resource "docker_container" "this" {
   name  = var.container_name
   image = docker_image.this.image_id
 
+  env = [
+    "CLICKHOUSE_USER=${var.clickhouse_user}",
+    "CLICKHOUSE_PASSWORD=${var.clickhouse_password}"
+  ]
+
   ports {
     internal = 9000
     external = var.native_port
